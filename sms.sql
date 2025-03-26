@@ -70,11 +70,21 @@ CALL add_customer('NGHI NGUYEN');
 DELIMITER //
 CREATE PROCEDURE delete_customer (IN c_customer_id INT)
 BEGIN
+	DECLARE error_occurred BOOL DEFAULT FALSE;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	SET error_occurred = TRUE;
+	START TRANSACTION;
+    
 	DELETE FROM LineItem WHERE order_id IN (
 		SELECT order_id FROM Orders WHERE customer_id = c_customer_id
 	);
     DELETE FROM Orders WHERE customer_id = c_customer_id;
     DELETE FROM Customer WHERE customer_id = c_customer_id;
+    IF error_occurred THEN 
+		ROLLBACK;
+    ELSE
+		COMMIT;
+	END IF;
 END //
 DELIMITER ;
 CALL delete_customer(3);
