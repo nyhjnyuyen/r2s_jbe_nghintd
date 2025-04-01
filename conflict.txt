@@ -1,5 +1,0 @@
-Nguyên nhân của conflict là khi git gặp trường hợp có nhiều hơn 1 phiên bản của code và nó không thể xác định được đâu là ý định của người viết. Trên ví dụ trong video, người dùng 
-đổi dòng Javascript thành Python hoặc việc tạo ra 1 file readme.txt trên mỗi branch. Để khắc phục conflict, ta có thể resolve conflict bằng cách đổi code ngay trên GitHub hoặc là 
-rebase trên terminal bằng cách git checkout main => git pull (lúc này main dang có code mới nhất). Sau đó, checkout sang branch đang có conflict, git rebase main => chọn phiên bản 
-=> commit => git push.
-
